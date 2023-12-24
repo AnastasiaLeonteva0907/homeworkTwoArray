@@ -50,41 +50,54 @@
 
 // Задача 2: Задайте двумерный массив. Напишите программу, которая поменяет местами первую и последнюю строку массива.
 
-// void InputMatrix(int[,] matrix)
-// {
-//     for(int i = 0; i < matrix.GetLength(0); i++)
-//     for(int j = 0; j < matrix.GetLength(1); j++)
-//         matrix[i, j] = new Random().Next(100, 1000);
-// }
+void InputMatrix(int[,] matrix)
+{
+    for(int i = 0; i < matrix.GetLength(0); i++)
+    for(int j = 0; j < matrix.GetLength(1); j++)
+        matrix[i, j] = new Random().Next(100, 500);
+}
 
-// void PrintMatrix(int[,] matrix)
-// {
-//     for(int i = 0; i < matrix.GetLength(0); i++)
-//     {
-//     for(int j = 0; j < matrix.GetLength(1); j++)
-//      Console.Write(matrix[i, j] + "\t");
-//         Console.WriteLine();
-//     }
-// }
+void PrintMatrix(int[,] matrix)
+{
+    for(int i = 0; i < matrix.GetLength(0); i++)
+    {
+    for(int j = 0; j < matrix.GetLength(1); j++)
+     Console.Write(matrix[i, j] + "\t");
+        Console.WriteLine();
+    }
+}
 
-// void ReleaseMatrix(int[,] newmatrix)
-// {
+void ReleaseMatrix(int[,] newmatrix)
+{
+    int tmp = newmatrix[0,0];
+    for(int m = 0; m < newmatrix.GetLength(0); m++)
+
+    {
+       
+        tmp = newmatrix[newmatrix.GetLength(0)-1, m];
+        newmatrix[newmatrix.GetLength(0)-1, m] = newmatrix[0, m];
+        newmatrix[0, m] = tmp;
+    }
+
+        for (int k = 0; k < newmatrix.GetLength(0); k++)
+            {
+                for (int m = 0; m < newmatrix.GetLength(1); m++)
+                {
+                    Console.Write($"{newmatrix[k,m]}\t");
+                }
+                Console.WriteLine();
+            }
     
-//     for(int i = 0; i < newmatrix.GetLength(0); i++)
-//         for(int j = 0; j < newmatrix.GetLength(1)/2; j++)
-//          int Fix = newmatrix[j];
-//    newmatrix [j] = newmatrix[newmatrix.GetLength-j-1];
-//    newmatrix[newmatrix.GetLength-j-1] = Fix;
+}
 
-// }
-
-// Console.Write("Введите размер матрицы: ");
-// int [] size = Console.ReadLine().Split(" ").Select(x => int.Parse(x)).ToArray();
-// int [,] matrix = new int [size[0], size[1]];
-// InputMatrix(matrix);
-// PrintMatrix(matrix);
-// int[,] newmatrix = matrix;
-// ReleaseMatrix(newmatrix);
+Console.Write("Введите размер матрицы: ");
+int [] size = Console.ReadLine().Split(" ").Select(x => int.Parse(x)).ToArray();
+int [,] matrix = new int [size[0], size[1]];
+InputMatrix(matrix);
+PrintMatrix(matrix);
+Console.WriteLine();
+int[,] newmatrix = matrix;
+ReleaseMatrix(newmatrix);
 
 // Задача 3: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 
@@ -118,26 +131,22 @@
 //     }
 //     Console.WriteLine("Суммы строк: " + string.Join(", ", avg));
 
-// }
 
-// void MinStringMatrix(int [] avg )
-// {
 //     int index = 0;
-//     int min = 0;
+//     int min = avg [0];
 //     for(int k = 0; k < avg.Length; k++)
 //     {
-//     min = avg[0];
 //     if(min >= avg[k])
 //     {
 //     min = avg[k];
-//     index = k;
+//     index = k +1 ;
 //     }
      
 //     }
-//    Console.WriteLine($"число {min}");
-//     Console.WriteLine($"индекс {index}");
-//     Console.WriteLine($"Строка с наименьшей суммой элементов: { index + 1 }");
+
+//     Console.WriteLine($"Строка с наименьшей суммой элементов: { index }");
 // }
+
 
 // Console.Write("Введите размер матрицы: ");
 // int[] size = Console.ReadLine().Split(" ").Select(x => int.Parse(x)).ToArray(); // [2, 5]
@@ -146,69 +155,6 @@
 // PrintMatrix(matrix);
 // Console.WriteLine();
 // ReleaseMatrix(matrix);
-// int[] avg = new int[matrix.GetLength(0)];
-// MinStringMatrix(avg);
-
-
-Console.Write("Введите размерность m массива: ");
-int m = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите размерность n массива: ");
-int n = Convert.ToInt32(Console.ReadLine());
-int[,] randomArray = new int[m,n];
-
-void mas(int m, int n)
-{
-int i,j;
-Random rand = new Random();
-for (i = 0; i < m; i++)
-{
-for (j = 0; j < n; j++)
-{
-randomArray[i,j] = rand.Next(1,9);
-}
-}
-}
-
-void printm(int[,] array)
-{
-int i,j;
-for (i = 0; i < array.GetLength(0); i++)
-{
-Console.WriteLine();
-for (j = 0; j < array.GetLength(1); j++)
-{
-Console.Write($"{array[i,j]} ");
-}
-Console.WriteLine();
-}
-}
-
-mas(m,n);
-Console.WriteLine("\nИсходный массив:" );
-printm(randomArray);
-
-// Функция, считающая сумму элементов в строке
-int SumLine(int[,] array, int i)
-{
-int sum = array[i,0];
-for (int j = 1; j < array.GetLength(1); j++)
-{
-sum += array[i,j];
-}
-return sum;
-}
-
-int minSum = 1;
-int sum = SumLine(randomArray, 0);
-for (int i = 1; i < randomArray.GetLength(0); i++)
-{
-if (sum > SumLine(randomArray, i))
-{
-sum = SumLine(randomArray, i);
-minSum = i+1;
-}
-}
-Console.WriteLine($"\nСтрока c наименьшей суммой элементов: {minSum}");
 
 
 // Задача 4*(не обязательная): Задайте двумерный массив из целых чисел. Напишите программу, которая удалит строку и столбец, на пересечении которых расположен наименьший элемент массива. Под удалением понимается создание нового двумерного массива без строки и столбца
